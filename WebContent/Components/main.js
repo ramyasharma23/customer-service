@@ -25,9 +25,9 @@ $(document).on("click", "#btnSave", function(event) {
 		return;
 	}
 	// If valid------------------------
-	var type = ($("#hidempIDSave").val() == "") ? "POST" : "PUT";
+	var type = ($("#hidecusIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax({
-		url : "EmployeeAPI",
+		url : "CustomerAPI",
 		type : "type",
 		data : $("#formItem").serialize(),
 		dataType : "text",
@@ -70,19 +70,19 @@ $(document).on("click", ".btnUpdate", function(event) {
 
 	$("#hidempIDSave").val($(this).data("itemid"));
 	
-	$("#employee_code").val($(this).closest("tr").find('td:eq(0)').text());
-	$("#empName").val($(this).closest("tr").find('td:eq(1)').text());
+	$("#customer_id").val($(this).closest("tr").find('td:eq(0)').text());
+	$("#customer_name").val($(this).closest("tr").find('td:eq(1)').text());
 	$("#address").val($(this).closest("tr").find('td:eq(2)').text());
-	$("#telepohneNo").val($(this).closest("tr").find('td:eq(3)').text());
+	$("#telephoneNo").val($(this).closest("tr").find('td:eq(3)').text());
 
 });
 
 //delete====================================================
 $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
-		url : "EmployeeAPI",
+		url : "CustomerAPI",
 		type : "DELETE",
-		data : "employee_id=" + $(this).data("itemid"),
+		data : "customerid=" + $(this).data("customerid"),
 		dataType : "text",
 		complete : function(response, status) {
 			onItemDeleteComplete(response.responseText, status);
@@ -113,11 +113,11 @@ function onItemDeleteComplete(response, status) {
 }
 //CLIENT-MODEL================================================================
 function validateItemForm() {
-	if ($("#payment_code").val().trim() == "") {
-		return "Insert Payment code.";
+	if ($("#customerid").val().trim() == "") {
+		return "Insert customer id.";
 	}
 	
-	if ($("#empName").val().trim() == "") {
+	if ($("#customer_name").val().trim() == "") {
 		return "Insert Name.";
 	}
 
@@ -126,12 +126,12 @@ function validateItemForm() {
 	}
 	
 	var tmpPrice = $("#amount").val().trim();
-	if (!$.isNumeric(telepohneNo)) {
+	if (!$.isNumeric(telephoneNo)) {
 		return "Insert a numerical value for mobile number.";
 	}
 
-	if ($("#empId").val().trim() == "") {
-		return "Insert Employee ID.";	
+	if ($("#customerid").val().trim() == "") {
+		return "Insert Customer ID.";	
 
 	}	
 	
